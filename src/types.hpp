@@ -9,10 +9,16 @@ typedef struct float3 Vector;
 typedef struct float3 Color;
 struct Material {
     Color color;
+    float smoothness;
+};
+struct HitInfo {
+    bool hit;
+    Vector location;
+    Vector normal;
 };
 class Shape {
 public:
-    virtual bool contains_point(const Vector& point) const = 0;
+    virtual HitInfo ray_test(const Vector& origin, const Vector& direction) const = 0;
 };
 struct Object {
     Shape& shape;
